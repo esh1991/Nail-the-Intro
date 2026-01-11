@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PitchPerfect AI (Prototype)</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="brandname">PitchPerfect AI</div>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn primary" id="startInterviewBtn" type="button">Start Interview</button>
+        <button class="btn secondary" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT -->
+      <div class="left">
+        <div class="panel">
+          <div class="videoWrap">
+            <div class="videoCard" id="videoDropZone" title="Drag and drop a video here">
+              <div class="hintBadge">▶ Interview Prompt</div>
+
+              <button class="bigUploadBtn" id="bigUploadBtn" type="button">
+                ⬆️ Upload Video
+              </button>
+
+              <video id="mainVideo" class="mainVideo" playsinline></video>
+
+              <div class="videoOverlay" id="videoOverlay">
+                <div class="subtitle">
+                  Upload a prompt video<br/>then click <span class="subtitleAccent">Start Interview</span>
+                  <small>Tip: drag & drop works too.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="leftBottom">
+          <!-- Audio recorder -->
+          <div class="miniBlock">
+            <div class="miniTitle"><span class="emoji">🎙️</span> AUDIO RECORDING</div>
+
+            <div class="pill">
+              <span class="dot" id="recDot"></span>
+              <span id="recLabel">IDLE</span>
+            </div>
+
+            <div class="recRow">
+              <button class="btn primary" id="recStartBtn" type="button">Start</button>
+              <button class="btn secondary" id="recStopBtn" type="button" disabled>Stop</button>
+            </div>
+
+            <div class="audioPreview" id="audioPreview" style="display:none;">
+              <div class="previewTitle">Latest recording</div>
+              <audio id="audioPlayback" controls></audio>
+              <div class="downloadRow">
+                <a id="audioDownload" href="#" download="interview-audio.webm">Download audio</a>
+              </div>
+            </div>
+
+            <div class="miniHint" id="speechHint">
+              Filler-word analysis uses browser speech recognition (best in Chrome).
+            </div>
+          </div>
+
+          <!-- Center: status -->
+          <div class="centerCTA">
+            <div class="ctaCol">
+              <div class="statusLine" id="statusLine">Ready</div>
+            </div>
+          </div>
+
+          <!-- Webcam preview -->
+          <div class="miniBlock">
+            <div class="miniTitle"><span class="emoji">👤</span> VISUAL REFERENCE</div>
+            <video id="webcam" class="miniVideo" autoplay muted playsinline></video>
+            <div class="miniHint">
+              Optional webcam preview (permission required).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right">
+        <div class="panel panelPad">
+          <!-- Tabs -->
+          <div class="rightTabs">
+            <button class="tabBtn active" id="tabScriptBtn" type="button">Script</button>
+            <button class="tabBtn" id="tabAnalysisBtn" type="button">Analysis</button>
+
+            <div class="tabBadge" id="tabBadge">SAVED</div>
+          </div>
+
+          <!-- SCRIPT PANEL (default open) -->
+          <div id="scriptPanel">
+            <div class="scriptDesc">
+              Jot down bullet points for your response.
+            </div>
+
+            <textarea id="notes" placeholder="E.g.
+- Who I am (present)
+- What I did (past)
+- What I want next (future)"></textarea>
+          </div>
+
+          <!-- ANALYSIS PANEL (hidden by default) -->
+          <div id="analysisPanel" style="display:none;">
+            <div class="analysisBody">
+              <div class="analysisRow">
+                <div class="analysisLabel">Status</div>
+                <div class="analysisValue" id="analysisBadge">WAITING</div>
+              </div>
+
+              <div class="analysisRow">
+                <div class="analysisLabel">Filler words</div>
+                <div class="analysisValue" id="fillerTotal">—</div>
+              </div>
+
+              <div class="analysisRow">
+                <div class="analysisLabel">Breakdown</div>
+                <div class="analysisValue mono" id="fillerBreakdown">—</div>
+              </div>
+
+              <div class="analysisRow">
+                <div class="analysisLabel">Transcript (best-effort)</div>
+              </div>
+
+              <div class="transcriptBox" id="transcriptBox">—</div>
+
+
+<div class="analysisRow" style="margin-top:10px;">
+  <div class="analysisLabel">Recommended script</div>
+</div>
+
+<div class="transcriptBox" id="recommendedScriptBox">—</div>
+
+
+
+              <div class="miniHint" id="analysisHint">
+                Tip: start recording before you answer. Transcript is generated while you speak.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden file input for main video upload -->
+    <input id="fileInput" type="file" accept="video/*" />
+  </div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
