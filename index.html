@@ -147,8 +147,37 @@
       </div>
     </div>
 
+<!-- SIGNUP -->
+<div class="signupWrap">
+  <div class="signupCard">
+    <div class="signupText">
+      <div class="signupTitle">Stay in the loop</div>
+      <div class="signupSubtitle">
+        Get updates on new interview formats, smarter analysis, and upcoming features.
+        No spam. Just useful improvements.
+      </div>
+    </div>
+
+    <form class="signupForm" onsubmit="handleSignup(event)">
+      <input
+        type="email"
+        id="signupEmail"
+        placeholder="you@email.com"
+        required
+      />
+      <button type="submit" class="btn primary">Notify me</button>
+    </form>
+
+    <div class="signupNote" id="signupNote" style="display:none;">
+      Thanks! You’re on the list 🙌
+    </div>
+  </div>
+</div>
+
+    
   </div>
 
   <script src="./app.js" defer></script>
 </body>
 </html>
+
