@@ -26,15 +26,13 @@
       <div class="left">
         <div class="panel">
           <div class="videoWrap">
-            <div class="videoCard" id="videoDropZone">
+            <div class="videoCard">
               <div class="hintBadge">▶ Interview Prompt</div>
 
               <video id="mainVideo" class="mainVideo" playsinline></video>
 
               <div class="videoOverlay" id="videoOverlay">
-                <div class="subtitle">
-                  Start Interview
-                </div>
+                <div class="subtitle">Start Interview</div>
               </div>
             </div>
           </div>
@@ -68,7 +66,7 @@
             </div>
           </div>
 
-          <!-- Center: status -->
+          <!-- Center status -->
           <div class="centerCTA">
             <div class="ctaCol">
               <div class="statusLine" id="statusLine">Ready</div>
@@ -89,26 +87,22 @@
       <!-- RIGHT -->
       <div class="right">
         <div class="panel panelPad">
-          <!-- Tabs -->
           <div class="rightTabs">
             <button class="tabBtn active" id="tabScriptBtn" type="button">Script</button>
             <button class="tabBtn" id="tabAnalysisBtn" type="button">Analysis</button>
             <div class="tabBadge" id="tabBadge">SAVED</div>
           </div>
 
-          <!-- SCRIPT PANEL (default open) -->
+          <!-- Script tab -->
           <div id="scriptPanel">
-            <div class="scriptDesc">
-              Jot down bullet points for your response.
-            </div>
-
+            <div class="scriptDesc">Jot down bullet points for your response.</div>
             <textarea id="notes" placeholder="E.g.
 - Who I am (present)
 - What I did (past)
 - What I want next (future)"></textarea>
           </div>
 
-          <!-- ANALYSIS PANEL (hidden by default) -->
+          <!-- Analysis tab -->
           <div id="analysisPanel" style="display:none;">
             <div class="analysisBody">
               <div class="analysisRow">
@@ -147,7 +141,7 @@
       </div>
     </div>
 
-    <!-- SIGNUP -->
+    <!-- SIGNUP (bottom) -->
     <div class="signupWrap">
       <div class="signupCard">
         <div class="signupText">
@@ -178,10 +172,8 @@
       </div>
     </div>
 
-  </div> <!-- ✅ this closes .app -->
+  </div>
 
   <script src="./app.js" defer></script>
 </body>
 </html>
-
-
