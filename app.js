@@ -15,6 +15,12 @@ const scriptPanel = $("scriptPanel");
 const analysisPanel = $("analysisPanel");
 const tabBadge = $("tabBadge");
 
+// -----------------------------
+// n8n webhook (replace with your production webhook URL)
+// -----------------------------
+const N8N_SIGNUP_WEBHOOK_URL = "https://YOUR_N8N_DOMAIN/webhook/your-webhook-path";
+
+
 function showRightTab(which){
   const isScript = which === "script";
   tabScriptBtn.classList.toggle("active", isScript);
@@ -539,25 +545,68 @@ setAnalysisResult({ transcript: "—", total: null, breakdownText: "—" });
 if (recommendedScriptBox) recommendedScriptBox.textContent = "—";
 
 // -----------------------------
-// Signup (frontend-only placeholder)
+// Signup -> n8n webhook
 // -----------------------------
-function handleSignup(e){
-  e.preventDefault();
+(function initSignup(){
+  const form = document.getElementById("signupForm");
+  if (!form) return;
 
   const emailInput = document.getElementById("signupEmail");
   const note = document.getElementById("signupNote");
+  const err = document.getElementById("signupError");
+  const btn = document.getElementById("signupBtn");
 
-  const email = emailInput.value.trim();
-  if (!email) return;
+  function show(el){
+    if (!el) return;
+    el.style.display = "block";
+  }
+  function hide(el){
+    if (!el) return;
+    el.style.display = "none";
+  }
 
-  // TODO: Replace this with real backend / Mailchimp / ConvertKit call
-  console.log("Signup email:", email);
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    hide(note);
+    hide(err);
 
-  emailInput.value = "";
-  note.style.display = "block";
+    const email = (emailInput.value || "").trim();
+    if (!email) return;
 
-  setTimeout(() => {
-    note.style.display = "none";
-  }, 4000);
-}
+    // UI: loading state
+    const prevText = btn.textContent;
+    btn.textContent = "Sending…";
+    btn.disabled = true;
+
+    try {
+      const payload = {
+        email,
+        source: "pitchperfect-site",
+        page: window.location.href,
+        userAgent: navigator.userAgent,
+        ts: new Date().toISOString(),
+      };
+
+      const res = await fetch(N8N_SIGNUP_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error(`Webhook error: ${res.status}`);
+
+      emailInput.value = "";
+      show(note);
+
+      setTimeout(() => hide(note), 4000);
+    } catch (e) {
+      console.warn(e);
+      show(err);
+    } finally {
+      btn.textContent = prevText;
+      btn.disabled = false;
+    }
+  });
+})();
+
 
