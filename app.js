@@ -9,7 +9,7 @@ function setStatus(text){ statusLine.textContent = text; }
 // -----------------------------
 // n8n webhook (replace with your production webhook URL)
 // -----------------------------
-const N8N_SIGNUP_WEBHOOK_URL = "https://esh1991.app.n8n.cloud/webhook-test/ccd103a6-2ebb-4c03-9010-f9abcbd9a70d";
+const N8N_SIGNUP_WEBHOOK_URL = "https://esh1991.app.n8n.cloud/webhook/ccd103a6-2ebb-4c03-9010-f9abcbd9a70d";
 
 // -----------------------------
 // Tabs (Right side)
@@ -593,5 +593,6 @@ setRecUI(false);
 setStatus("Ready");
 setAnalysisResult({ transcript: "—", total: null, breakdownText: "—" });
 if (recommendedScriptBox) recommendedScriptBox.textContent = "—";
+
 
 
