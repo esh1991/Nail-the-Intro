@@ -10,7 +10,8 @@
   <div class="app">
     <div class="topbar">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
+        <!-- Update: Using logo.png from your repository -->
+        <img src="logo.png" alt="Logo" class="brand-logo" onerror="this.style.display='none';">
         <div class="brandname">PitchPerfect AI</div>
       </div>
 
@@ -22,17 +23,15 @@
     </div>
 
     <div class="grid">
-      <!-- LEFT -->
+      <!-- LEFT COLUMN -->
       <div class="left">
         <div class="panel">
           <div class="videoWrap">
             <div class="videoCard">
               <div class="hintBadge">▶ Interview Prompt</div>
-
               <video id="mainVideo" class="mainVideo" playsinline></video>
-
               <div class="videoOverlay" id="videoOverlay">
-                <div class="subtitle">Start Interview</div>
+                <div class="subtitle">Interviewer Ready</div>
               </div>
             </div>
           </div>
@@ -42,27 +41,20 @@
           <!-- Audio recorder -->
           <div class="miniBlock">
             <div class="miniTitle"><span class="emoji">🎙️</span> AUDIO RECORDING</div>
-
             <div class="pill">
               <span class="dot" id="recDot"></span>
               <span id="recLabel">IDLE</span>
             </div>
-
             <div class="recRow">
               <button class="btn primary" id="recStartBtn" type="button">Start</button>
               <button class="btn secondary" id="recStopBtn" type="button" disabled>Stop</button>
             </div>
-
             <div class="audioPreview" id="audioPreview" style="display:none;">
               <div class="previewTitle">Latest recording</div>
               <audio id="audioPlayback" controls></audio>
               <div class="downloadRow">
                 <a id="audioDownload" href="#" download="interview-audio.webm">Download audio</a>
               </div>
-            </div>
-
-            <div class="miniHint" id="speechHint">
-              Filler-word analysis uses browser speech recognition (best in Chrome).
             </div>
           </div>
 
@@ -77,14 +69,11 @@
           <div class="miniBlock">
             <div class="miniTitle"><span class="emoji">👤</span> VISUAL REFERENCE</div>
             <video id="webcam" class="miniVideo" autoplay muted playsinline></video>
-            <div class="miniHint">
-              Optional webcam preview (permission required).
-            </div>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT -->
+      <!-- RIGHT COLUMN -->
       <div class="right">
         <div class="panel panelPad">
           <div class="rightTabs">
@@ -109,32 +98,23 @@
                 <div class="analysisLabel">Status</div>
                 <div class="analysisValue" id="analysisBadge">WAITING</div>
               </div>
-
               <div class="analysisRow">
                 <div class="analysisLabel">Filler words</div>
                 <div class="analysisValue" id="fillerTotal">—</div>
               </div>
-
               <div class="analysisRow">
                 <div class="analysisLabel">Breakdown</div>
                 <div class="analysisValue mono" id="fillerBreakdown">—</div>
               </div>
-
-              <div class="analysisRow">
-                <div class="analysisLabel">Transcript (best-effort)</div>
-              </div>
-
-              <div class="transcriptBox" id="transcriptBox">—</div>
-
-              <div class="analysisRow" style="margin-top:10px;">
+              
+              <div class="analysisRow" style="margin-top:10px; border-bottom:none;">
                 <div class="analysisLabel">Recommended script</div>
+                <button class="copy-btn" id="copyScriptBtn">Copy</button>
               </div>
+              <div class="transcriptBox highlighted" id="recommendedScriptBox">—</div>
 
-              <div class="transcriptBox" id="recommendedScriptBox">—</div>
-
-              <div class="miniHint" id="analysisHint">
-                Tip: start recording before you answer. Transcript is generated while you speak.
-              </div>
+              <div class="analysisLabel" style="margin-top:15px;">Transcript (Original)</div>
+              <div class="transcriptBox" id="transcriptBox">—</div>
             </div>
           </div>
         </div>
@@ -146,34 +126,17 @@
       <div class="signupCard">
         <div class="signupText">
           <div class="signupTitle">Stay in the loop</div>
-          <div class="signupSubtitle">
-            Get updates on new interview formats, smarter analysis, and upcoming features.
-            No spam. Just useful improvements.
-          </div>
+          <div class="signupSubtitle">Get smarter analysis and upcoming features via email.</div>
         </div>
-
         <form class="signupForm" id="signupForm">
-          <input
-            type="email"
-            id="signupEmail"
-            placeholder="you@email.com"
-            required
-          />
+          <input type="email" id="signupEmail" placeholder="you@email.com" required />
           <button type="submit" class="btn primary" id="signupBtn">Notify me</button>
         </form>
-
-        <div class="signupNote" id="signupNote" style="display:none;">
-          Thanks! You’re on the list 🙌
-        </div>
-
-        <div class="signupError" id="signupError" style="display:none;">
-          Something went wrong. Please try again.
-        </div>
+        <div class="signupNote" id="signupNote" style="display:none;">Thanks! You’re on the list 🙌</div>
+        <div class="signupError" id="signupError" style="display:none;">Something went wrong.</div>
       </div>
     </div>
-
   </div>
-
   <script src="./app.js" defer></script>
 </body>
 </html>
